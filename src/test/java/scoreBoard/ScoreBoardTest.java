@@ -23,4 +23,18 @@ class ScoreBoardTest {
 
         assertTrue(matches.contains(match));
     }
+
+    @Test
+    public void shouldUpdateTheScoreDuringTheMatch(){
+        final Team argentina = new Team(Country.ARGENTINA.getCountryName());
+        final Team australia = new Team(Country.AUSTRALIA.getCountryName());
+        scoreBoard.startGame(argentina,
+                australia);
+        final Match updatedMatch = scoreBoard.updateGameScore(argentina, australia, 1, 0);
+
+        assertEquals(updatedMatch.getAwayTeamScore(), 0);
+        assertEquals(updatedMatch.getHomeTeamScore(), 1);
+
+
+    }
 }

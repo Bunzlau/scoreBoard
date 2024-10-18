@@ -6,16 +6,16 @@ import java.util.Objects;
 public class Match {
     private Team homeWayTeam;
     private Team awayTeam;
-    private int homeScore;
-    private int awayScore;
+    private int homeTeamScore;
+    private int awayTeamScore;
     private final LocalDateTime localDateTime;
 
-    public Match(Team homeWayTeam, Team awayTeam, int awayScore,
-            int homeScore, LocalDateTime localDateTime) {
+    public Match(Team homeWayTeam, Team awayTeam, int awayTeamScore,
+            int homeTeamScore, LocalDateTime localDateTime) {
         this.homeWayTeam = homeWayTeam;
         this.awayTeam = awayTeam;
-        this.awayScore = awayScore;
-        this.homeScore = homeScore;
+        this.awayTeamScore = awayTeamScore;
+        this.homeTeamScore = homeTeamScore;
         this.localDateTime = localDateTime;
     }
 
@@ -23,32 +23,32 @@ public class Match {
         return homeWayTeam;
     }
 
-    public int getAwayScore() {
-        return awayScore;
+    public int getAwayTeamScore() {
+        return awayTeamScore;
     }
 
     public Team getAwayTeam() {
         return awayTeam;
     }
 
-    public int getHomeScore() {
-        return homeScore;
+    public int getHomeTeamScore() {
+        return homeTeamScore;
     }
 
     public void setHomeWayTeam(Team homeWayTeam) {
         this.homeWayTeam = homeWayTeam;
     }
 
-    public void setAwayScore(int awayScore) {
-        this.awayScore = awayScore;
+    public void setAwayTeamScore(int awayTeamScore) {
+        this.awayTeamScore = awayTeamScore;
     }
 
     public void setAwayTeam(Team awayTeam) {
         this.awayTeam = awayTeam;
     }
 
-    public void setHomeScore(int homeScore) {
-        this.homeScore = homeScore;
+    public void setHomeTeamScore(int homeTeamScore) {
+        this.homeTeamScore = homeTeamScore;
     }
 
     public LocalDateTime getLocalDateTime() {
@@ -57,7 +57,7 @@ public class Match {
 
     @Override
     public int hashCode() {
-        return Objects.hash(homeWayTeam, awayTeam, homeScore, awayScore, localDateTime);
+        return Objects.hash(homeWayTeam, awayTeam, homeTeamScore, awayTeamScore, localDateTime);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Match {
             return false;
         }
         final Match match = (Match) o;
-        return homeScore == match.homeScore && awayScore == match.awayScore && Objects.equals(
+        return homeTeamScore == match.homeTeamScore && awayTeamScore == match.awayTeamScore && Objects.equals(
                 homeWayTeam, match.homeWayTeam) && Objects.equals(awayTeam, match.awayTeam)
                 && Objects.equals(localDateTime, match.localDateTime);
     }
@@ -79,8 +79,8 @@ public class Match {
         return "Match{" +
                 "homeWayTeam=" + homeWayTeam +
                 ", awayTeam=" + awayTeam +
-                ", homeScore=" + homeScore +
-                ", awayScore=" + awayScore +
+                ", homeScore=" + homeTeamScore +
+                ", awayScore=" + awayTeamScore +
                 ", localDateTime=" + localDateTime +
                 '}';
     }

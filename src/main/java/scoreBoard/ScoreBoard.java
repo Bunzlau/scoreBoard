@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,8 +27,27 @@ public class ScoreBoard {
         return match;
     }
 
-    public List<Match> getMatches(){
+    public List<Match> getMatches() {
         return Collections.unmodifiableList(matches);
+    }
+
+    public Match updateGameScore(Team homeTeam, Team awayTeam, int homeScore, int awayScore) {
+        Match updatedMatch = null;
+        if (Objects.isNull(homeTeam) && Objects.isNull(awayTeam)) {
+            throw new IllegalArgumentException("Home and Away teams cannot be null");
+        }
+        for (Match match : matches) {
+            if (match.getAwayTeam().equals(awayTeam) && match.getHomeWayTeam().equals(homeTeam)) {
+                match.setAwayTeamScore(awayScore);
+                match.setHomeTeamScore(homeScore);
+
+                logger.info("Current match status :{} {}:{}:{}", match.getHomeWayTeam(),
+                        match.getAwayTeam(), match.getHomeTeamScore(), match.getAwayTeamScore());
+                updatedMatch = match;
+
+            }
+        }
+        return updatedMatch;
     }
 
 }

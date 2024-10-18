@@ -3,7 +3,8 @@ package scoreBoard;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class Match {
+public class Match implements Comparable<Match> {
+
     private Team homeWayTeam;
     private Team awayTeam;
     private int homeTeamScore;
@@ -69,9 +70,23 @@ public class Match {
             return false;
         }
         final Match match = (Match) o;
-        return homeTeamScore == match.homeTeamScore && awayTeamScore == match.awayTeamScore && Objects.equals(
+        return homeTeamScore == match.homeTeamScore && awayTeamScore == match.awayTeamScore
+                && Objects.equals(
                 homeWayTeam, match.homeWayTeam) && Objects.equals(awayTeam, match.awayTeam)
                 && Objects.equals(localDateTime, match.localDateTime);
+    }
+
+    @Override
+    public int compareTo(Match otherMatch) {
+        final int matchTotalScoreThis = this.homeTeamScore + this.awayTeamScore;
+        final int matchTotalScoreOther =
+                otherMatch.getHomeTeamScore() + otherMatch.getAwayTeamScore();
+        int matchScoreComparison = Integer.compare(matchTotalScoreOther, matchTotalScoreThis);
+
+        if (matchScoreComparison == 0) {
+            return otherMatch.getLocalDateTime().compareTo(this.getLocalDateTime());
+        }
+        return matchScoreComparison;
     }
 
     @Override

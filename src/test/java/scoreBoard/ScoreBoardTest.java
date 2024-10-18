@@ -49,9 +49,17 @@ class ScoreBoardTest {
     public void shouldUpdateTheScoreDuringTheMatch() {
         startAndSetScore(mexico, canada, 3, 2);
 
-        Match updatedMatch = scoreBoard.updateGameScore(mexico, canada, 1, 0);
+        Match updatedMatch = scoreBoard.updateGameScore(mexico, canada, 1, 0).get();
         assertEquals(1, updatedMatch.getHomeTeamScore(), "Home team score should be 1");
         assertEquals(0, updatedMatch.getAwayTeamScore(), "Away team score should be 0");
+    }
+
+    @Test
+    public void shouldRemoveTheGameFromTheMatch() {
+        final Match match = scoreBoard.startGame(mexico, canada);
+        scoreBoard.finishTheGame(match);
+        final List<Match> matches = scoreBoard.getMatches();
+        assertEquals(matches.size(), 0, "The score board should be empty");
     }
 
     @Test
@@ -62,13 +70,16 @@ class ScoreBoardTest {
 
         List<Match> summary = scoreBoard.getSummaryOfTheGames();
 
-        assertEquals(5, summary.get(0).getHomeTeamScore() + summary.get(0).getAwayTeamScore(), "Match with highest score should be first");
+        assertEquals(5, summary.get(0).getHomeTeamScore() + summary.get(0).getAwayTeamScore(),
+                "Match with highest score should be first");
         assertEquals(mexico, summary.get(0).getHomeWayTeam());
 
-        assertEquals(4, summary.get(1).getHomeTeamScore() + summary.get(1).getAwayTeamScore(), "Match with second highest score should be second");
+        assertEquals(4, summary.get(1).getHomeTeamScore() + summary.get(1).getAwayTeamScore(),
+                "Match with second highest score should be second");
         assertEquals(brazil, summary.get(1).getHomeWayTeam());
 
-        assertEquals(2, summary.get(2).getHomeTeamScore() + summary.get(2).getAwayTeamScore(), "Match with lowest score should be last");
+        assertEquals(2, summary.get(2).getHomeTeamScore() + summary.get(2).getAwayTeamScore(),
+                "Match with lowest score should be last");
         assertEquals(germany, summary.get(2).getHomeWayTeam());
 
         assertEquals(3, summary.size(), "There should be 3 matches in total");

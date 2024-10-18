@@ -1,7 +1,5 @@
 package scoreBoard;
 
-import java.util.List;
-
 public enum Country {
     MEXICO("Mexico"),
     CANADA("Canada"),

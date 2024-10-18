@@ -1,6 +1,5 @@
 package scoreBoard;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,7 @@ public class ScoreBoard {
 
     public Match startGame(Team homeTeam, Team awayTeam) {
         final Match match = new Match(homeTeam, awayTeam, INITIAL_STATE_OF_THE_GAME,
-                INITIAL_STATE_OF_THE_GAME, LocalDateTime.now());
+                INITIAL_STATE_OF_THE_GAME);
         matches.add(match);
         return match;
     }
@@ -43,8 +42,7 @@ public class ScoreBoard {
 
         Optional<Match> optionalMatch = findMatch(homeTeam, awayTeam);
         optionalMatch.ifPresent(match -> {
-            match.setHomeTeamScore(homeScore);
-            match.setAwayTeamScore(awayScore);
+            match.updateScore(homeScore, awayScore);
             logger.info("Current match status: {} {}:{}:{}", match.getHomeWayTeam(),
                     match.getAwayTeam(), match.getHomeTeamScore(), match.getAwayTeamScore());
         });

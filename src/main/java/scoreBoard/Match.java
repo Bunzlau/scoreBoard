@@ -5,19 +5,19 @@ import java.util.Objects;
 
 public class Match implements Comparable<Match> {
 
-    private Team homeWayTeam;
-    private Team awayTeam;
+    private final Team homeWayTeam;
+    private final Team awayTeam;
     private int homeTeamScore;
     private int awayTeamScore;
     private final LocalDateTime localDateTime;
 
     public Match(Team homeWayTeam, Team awayTeam, int awayTeamScore,
-            int homeTeamScore, LocalDateTime localDateTime) {
+            int homeTeamScore) {
         this.homeWayTeam = homeWayTeam;
         this.awayTeam = awayTeam;
         this.awayTeamScore = awayTeamScore;
         this.homeTeamScore = homeTeamScore;
-        this.localDateTime = localDateTime;
+        this.localDateTime = LocalDateTime.now();
     }
 
     public Team getHomeWayTeam() {
@@ -36,20 +36,12 @@ public class Match implements Comparable<Match> {
         return homeTeamScore;
     }
 
-    public void setHomeWayTeam(Team homeWayTeam) {
-        this.homeWayTeam = homeWayTeam;
-    }
-
-    public void setAwayTeamScore(int awayTeamScore) {
-        this.awayTeamScore = awayTeamScore;
-    }
-
-    public void setAwayTeam(Team awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public void setHomeTeamScore(int homeTeamScore) {
-        this.homeTeamScore = homeTeamScore;
+    public void updateScore(int homeScore, int awayScore) {
+        if (homeScore < 0 || awayScore < 0) {
+            throw new IllegalArgumentException("Score cannot be negative");
+        }
+        this.homeTeamScore = homeScore;
+        this.awayTeamScore = awayScore;
     }
 
     public LocalDateTime getLocalDateTime() {

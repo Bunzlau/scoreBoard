@@ -1,4 +1,4 @@
-package scoreBoard;
+package scoreBoard.game;
 
 import java.util.Objects;
 

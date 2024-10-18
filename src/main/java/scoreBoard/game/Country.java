@@ -1,4 +1,4 @@
-package scoreBoard;
+package scoreBoard.game;
 
 public enum Country {
     MEXICO("Mexico"),

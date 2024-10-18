@@ -61,6 +61,20 @@ public class Match {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final Match match = (Match) o;
+        return homeScore == match.homeScore && awayScore == match.awayScore && Objects.equals(
+                homeWayTeam, match.homeWayTeam) && Objects.equals(awayTeam, match.awayTeam)
+                && Objects.equals(localDateTime, match.localDateTime);
+    }
+
+    @Override
     public String toString() {
         return "Match{" +
                 "homeWayTeam=" + homeWayTeam +

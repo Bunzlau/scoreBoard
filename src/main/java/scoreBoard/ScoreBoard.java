@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ScoreBoard {
-    final static int INITIAL_STATE = 0;
+    final static int INITIAL_STATE_OF_THE_GAME = 0;
     private static final Logger logger = LoggerFactory.getLogger(ScoreBoard.class);
     private final List<Match> matches;
 
@@ -18,10 +18,10 @@ public class ScoreBoard {
     }
 
     public Match startGame(Team homeTeam, Team awayTeam) {
-        final Match match = new Match(homeTeam, awayTeam, INITIAL_STATE, INITIAL_STATE,
+        final Match match = new Match(homeTeam, awayTeam, INITIAL_STATE_OF_THE_GAME, INITIAL_STATE_OF_THE_GAME,
                 LocalDateTime.now());
 
-        matches.add(new Match(homeTeam, awayTeam, INITIAL_STATE, INITIAL_STATE,
+        matches.add(new Match(homeTeam, awayTeam, INITIAL_STATE_OF_THE_GAME, INITIAL_STATE_OF_THE_GAME,
                 LocalDateTime.now()));
 
         return match;
@@ -48,6 +48,11 @@ public class ScoreBoard {
             }
         }
         return updatedMatch;
+    }
+    public List<Match> getSummaryOfTheGames(){
+        List<Match> sortedMatchers = new ArrayList<>(matches);
+        Collections.sort(sortedMatchers);
+        return sortedMatchers;
     }
 
 }
